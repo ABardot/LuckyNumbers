@@ -6,24 +6,24 @@ namespace LuckyNumbers
     {
         static void Main(string[] args)
         {
-            int jackPot = 500; //Hard-coded the jackpot amount asked by product owner
+            double jackPot = 500.00; //Hard-coded the jackpot amount asked by product owner
 
-            Console.WriteLine("Welcome to the Lucky Numbers game, press enter to see today jackpot!");//The start of the application
+            Console.WriteLine("Welcome to the Lucky Numbers game, press enter to see todays jackpot!");//The start of the application
             Console.ReadLine();
-            Console.WriteLine("Todays jackpot is {0}, press enter to get the game started.", jackPot);//Jackpot info
+            Console.WriteLine("Todays jackpot is ${0}, press enter to get the game started.", jackPot);//Jackpot info
             Console.ReadLine();
 
             Console.WriteLine("Please enter a starting number: "); //Set a lowest number
             int startNumber = int.Parse(Console.ReadLine());
-            
-            Console.WriteLine("Please enter a ending number: "); //Set as highest number
+
+            Console.WriteLine("Please enter a ending number: "); //Set a highest number
             int endingNumber = int.Parse(Console.ReadLine());
             if (endingNumber <= startNumber)
             {
                 Console.WriteLine("Please enter a number higher than your first number: ");
                 endingNumber = int.Parse(Console.ReadLine());
             }
-           
+
             int[] userSixNumbers = new int[6];
             Console.WriteLine("Please enter 6 number of your choice: "); //User needs to input 6 numbers
             for (int i = 0; i < userSixNumbers.Length; i++)
@@ -39,28 +39,66 @@ namespace LuckyNumbers
                     Console.WriteLine("Please enter numbers lower than your ending numbers: ");
                     userSixNumbers[i] = int.Parse(Console.ReadLine());
                 }
-            } //What else do I need here to validate the range entered by the user=====================Remove when done====================>
+            } 
 
-            
             int[] randomSixNumbers = new int[6]; //Randomly generated numbers
             Random randomGen = new Random(); //Random method provided to us
-            for (int i = 0; i < userSixNumbers.Length; i++)
+            int countedNumber = 0;
+            for (int j = 0; j < userSixNumbers.Length; j++)
             {
-                for (int j = 0; j < randomSixNumbers.Length; i++)
+                randomSixNumbers[j] = randomGen.Next(startNumber, endingNumber);
+                Console.WriteLine("Lucky Numbers: {0} ", randomSixNumbers[j]);
+                for (int i = 0; i < userSixNumbers.Length; i++) //Loop to check and see if userSixNumbers matches any randomSixNumbers
                 {
-                    randomSixNumbers[j] = randomGen.Next(startNumber, endingNumber);
-                    Console.WriteLine(randomSixNumbers[j]);
-
-                    int countedNumbers = 0;
                     if (randomSixNumbers[j] == userSixNumbers[i])
                     {
-                        countedNumbers++;
+                        countedNumber++;
                     }
                 }
             }
+            Console.WriteLine("You guessed {0} numbers correctly", countedNumber);//Output with the correctly guessed numbers
+
+             switch (countedNumber) //Switch statement to execute the winnings 
+            {
+                case 1:
+                    Console.WriteLine("You won $50");
+                    break;
+                case 2:
+                    Console.WriteLine("You won $100");
+                    break;
+                case 3:
+                    Console.WriteLine("You won $150");
+                    break;
+                case 4:
+                    Console.WriteLine("You won $200");
+                    break;
+                case 5:
+                    Console.WriteLine("You won $250");
+                    break;
+                case 6:
+                    Console.WriteLine("You won $500");
+                    break;
+                default:
+                    Console.WriteLine("You won $0");
+                    break;
+            } 
 
 
 
-        }
+
+
+            //if (countedNumber == 0)
+            //{
+            //    Console.WriteLine("Sorry you had no matching numbers.");
+            //}
+            //else
+            //{
+            //    double winningTotal = (jackPot / (double)countedNumber);
+            //    Console.WriteLine("You won ${0} ", winningTotal);
+            //}
+
+
+
+        }//Main Method
     }
 }
