@@ -1,69 +1,68 @@
 ﻿using System;
 
-namespace LuckyNumbers
+namespace LuckyNumbers //Adrien Bardot Lucky Numbers Project 2
 {
     internal class Program
     {
-        private static void Main()
+        private static void Main() 
         {
-            while (true) //Start of my while loop to end or continue playing
+            while (true) //The application MUST provide the user the opportunity to play the game again.
             {
-                double jackPot = 500.00; //Hard-coded the jackpot amount asked by product owner
+                double jackPot = 500.00; //The application MUST provide a Hard-code value for the jackpot amount.
 
-                Console.WriteLine("Welcome to the Lucky Numbers game, press enter to see todays jackpot!");//The start of the application
+                Console.WriteLine("Welcome to the Lucky Numbers game, press enter to see today's jackpot!");//The start of the application.
                 Console.ReadLine();
-                Console.WriteLine("Todays jackpot is ${0}, press enter to get the game started.", jackPot);//Jackpot info
-                Console.ReadLine();
+                Console.WriteLine("Today's jackpot is ${0}, press enter to get the game started.", jackPot);
+                Console.ReadLine(); //The application MUST present the jackpot amount to the user.
 
-                Console.WriteLine("Please enter a starting number: "); //User sets a lowest number
-                int startNumber = int.Parse(Console.ReadLine());
+                Console.WriteLine("Please enter a starting number: "); //The application MUST ask the user for a starting number.
+                int startNumber = int.Parse(Console.ReadLine()); 
 
-                Console.WriteLine("Please enter an ending number: "); //User sets a highest number
-                int endingNumber = int.Parse(Console.ReadLine());
+                Console.WriteLine("Please enter an ending number: "); //The application MUST ask the user for an ending number.
+                int endingNumber = int.Parse(Console.ReadLine()); 
                 if (endingNumber <= startNumber)
                 {
-                    Console.WriteLine("Please enter a number higher than your first number: "); //Validates if user higher number is lower than the start
-                    endingNumber = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Please enter a number higher than your first number: ");
+                    endingNumber = int.Parse(Console.ReadLine()); //The application MUST set this number as the highest number in the number range.
                 }
-
-                int[] userSixNumbers = new int[6]; //Declared array for the six user inputs
-                Console.WriteLine("Please enter 6 numbers of your choice: "); //Prompts user to input six numbers
-                for (int i = 0; i < userSixNumbers.Length; i++)
+                int[] userSixNumbers = new int[6]; //The application MUST save the 6 user inputed numbers utilizing an array data structure
+                Console.WriteLine("Please enter 6 numbers of your choice: "); //The application MUST ask the user to input 6 numbers
+                for (int i = 0; i < userSixNumbers.Length; i++) //The Application MUST use a loop to populate the required array
                 {
-                    userSixNumbers[i] = int.Parse(Console.ReadLine()); //This will populate the array with the users input
-                    if (userSixNumbers[i] < startNumber) //Validates if user input is higher than start number
+                    userSixNumbers[i] = int.Parse(Console.ReadLine()); 
+                    if (userSixNumbers[i] < startNumber) //The application MUST validate 6 numbers entered by the user are with the range set.
                     {
                         Console.WriteLine("Please enter numbers higher than your starting numbers: ");
-                        userSixNumbers[i] = int.Parse(Console.ReadLine()); //Prompts user to enter higher number than starting number
+                        userSixNumbers[i] = int.Parse(Console.ReadLine()); //The application MUST prompt the user to input a valid number until the number(s) entered are valid.
                     }
-                    else if (userSixNumbers[i] > endingNumber)
+                    else if (userSixNumbers[i] > endingNumber) //The application MUST validate 6 numbers entered by the user are with the range set.
                     {
                         Console.WriteLine("Please enter numbers lower than your ending numbers: ");
-                        userSixNumbers[i] = int.Parse(Console.ReadLine()); //Prompts user to enter lower number than ending number
+                        userSixNumbers[i] = int.Parse(Console.ReadLine()); //The application MUST prompt the user to input a valid number until the number(s) entered are valid.
                     }
                 }
 
-                int[] randomSixNumbers = new int[6]; //Randomly generated numbers
+                int[] randomSixNumbers = new int[6]; //The application MUST save randomly generated numbers utilizing an array data structure.
                 Random randomGen = new Random(); //Random method
                 int countedNumber = 0;
-                for (int j = 0; j < userSixNumbers.Length; j++)
-                {
+                for (int j = 0; j < userSixNumbers.Length; j++) //The application MUST randomly generate 6 numbers using a loop
+                {                                               //The application MUST use a loop to populate the required array.
                     randomSixNumbers[j] = randomGen.Next(startNumber, endingNumber);
-                    Console.WriteLine("Lucky Numbers: {0} ", randomSixNumbers[j]); //Lucky Numbers info
-                    for (int i = 0; i < userSixNumbers.Length; i++) //Loop to check and see if userSixNumbers matches any randomSixNumbers
-                    {
-                        if (randomSixNumbers[j] == userSixNumbers[i])
+                    Console.WriteLine("Lucky Numbers: {0} ", randomSixNumbers[j]); //The application MUST be displayed in the following format
+                    for (int i = 0; i < userSixNumbers.Length; i++) //The application MUST randomly generate 6 numbers using a loop
+                    {                                               //The application MUST display the random numbers to the console using a loop.
+                        if (randomSixNumbers[j] == userSixNumbers[i]) //The application MUST count the number of correctly guessed numbers.
                         {
-                            countedNumber++;
+                            countedNumber++; 
                         }
                     }
                 }
 
-                Console.WriteLine("You guessed {0} numbers correctly", countedNumber);//Output with the correctly guessed numbers
-                switch (countedNumber) //Switch statement to execute the winnings
+                Console.WriteLine("You guessed {0} numbers correctly", countedNumber); //The application MUST output to the console to notify the user.
+                switch (countedNumber) //The application MUST calculate the user's winnings based on the number of numbers guessed correctly
                 {
                     case 1:
-                        Console.WriteLine("You won $50");
+                        Console.WriteLine("You won $50"); //The application MUST display the user's winnings to the console.
                         break;
 
                     case 2:
@@ -91,15 +90,15 @@ namespace LuckyNumbers
                         break;
                 }
 
-                while (true) //Continue asking until a correct answer is given
+                while (true) //This loop will continue to prompt user until the loop results in a bool value
                 {
                     Console.Write("Do you want to try your luck again? [Y/N]?");
-                    string answer = Console.ReadLine().ToUpper();
-                    if (answer == "Y")
-                        break; //Exits the inner while-loop and continue in the outer while loop
+                    string answer = Console.ReadLine().ToUpper(); //The application MUST provide the user the opportunity to play the game again.
+                    if (answer == "Y") //If the user says yes, the application MUST execute the program from the beginning.
+                        break; 
                     if (answer == "N")
                         Console.WriteLine("Thanks for playing!");
-                    return; //Exits the application or the main method
+                    return; //If the user says no, the application MUST display the following statement exactly as written below before exiting
                 }
             } //The whole application is a loop
         }
